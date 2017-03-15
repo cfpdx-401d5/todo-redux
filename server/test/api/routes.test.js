@@ -30,4 +30,12 @@ describe('todo routes', () => {
                 assert.isArray(res.body);
             });
     });
+
+    it('PUT updates a Todo', () => {
+        return request.put(`/${todoOne._id}`)
+            .send({completed: true})
+            .then(res => {
+                assert.equal(res.body.completed, true);
+            });
+    });
 });

@@ -15,6 +15,11 @@ router
         .lean()
         .then(todos => res.send(todos))
         .catch(next);
+    })
+    .put('/:id', bodyParser, (req, res, next) => {
+        Todo.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+        .then(todo => res.send(todo))
+        .catch(next);
     });
 
 
