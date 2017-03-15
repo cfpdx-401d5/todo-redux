@@ -38,4 +38,11 @@ describe('todo routes', () => {
                 assert.equal(res.body.completed, true);
             });
     });
+
+    it('DELETE permanently removes Todo item', () => {
+        return request.delete(`/${todoOne._id}`)
+            .then(res => {
+                assert.deepEqual(res.body, {deleted: true});
+            });
+    });
 });

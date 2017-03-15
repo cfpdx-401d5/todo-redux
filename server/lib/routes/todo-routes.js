@@ -20,8 +20,12 @@ router
         Todo.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
         .then(todo => res.send(todo))
         .catch(next);
+    })
+    .delete('/:id', (req, res, next) => {
+        Todo.findByIdAndRemove(req.params.id)
+            .then(deleted => res.send({deleted: !!deleted}))
+            .catch(next);
     });
-
 
 module.exports = router;
 
