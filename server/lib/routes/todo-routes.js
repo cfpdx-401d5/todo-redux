@@ -1,15 +1,21 @@
 const router = require('express').Router();
-// const bodyParser = require('body-parser').json();
-// const Todo = require('../model/todo-schema');
+const bodyParser = require('body-parser').json();
+const Todo = require('../model/todo-schema');
 
-router;
-    // .post('/', bodyParser, (req, res, next) => {
-    //     new Todo(req.body).save()
-    //     .then(todo => {
-    //         res.send(todo);
-    //     })
-    //     .catch(next);
-    // });
+router
+    .post('/', bodyParser, (req, res, next) => {
+        new Todo(req.body).save()
+        .then(todo => {
+            res.send(todo);
+        })
+        .catch(next);
+    })
+    .get('/', (req, res, next) => {
+        Todo.find()
+        .lean()
+        .then(todos => res.send(todos))
+        .catch(next);
+    });
 
 
 module.exports = router;
