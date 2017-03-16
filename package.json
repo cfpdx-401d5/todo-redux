@@ -1,0 +1,33 @@
+{
+  "name": "todo-redux",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmd-kvn/todo-redux.git"
+  },
+  "author": "Kevin Wong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmd-kvn/todo-redux/issues"
+  },
+  "homepage": "https://github.com/cmd-kvn/todo-redux#readme",
+  "description": ""
+}
