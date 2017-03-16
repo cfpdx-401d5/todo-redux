@@ -1,4 +1,4 @@
-function fetcher(options) {
+export default function fetcher(options) {
     const { method, path, body } = options;
     return fetch(`http://localhost:4000${path}`, {
         method: method,
@@ -10,12 +10,12 @@ function fetcher(options) {
     });
 }
 
-export default function doFetch(options) {
-    fetcher(options)
-        .then(res => {
-            return res.json();
-        })
-        .catch(err => {
-            console.error('err: ', err);
-        });
-}
+// function doFetch(options) {
+//     fetcher(options)
+//         .then(res => {
+//             return res.json();
+//         })
+//         .catch(err => {
+//             console.error('err: ', err);
+//         });
+// }

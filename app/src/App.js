@@ -1,52 +1,52 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { itemsFetchData } from './actions/items';
 import NewTodo from './components/NewTodo';
 import TodoList from './components/TodoList';
 import ListActions from './components/ListActions';
-import doFetch from './helpers';
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            todos: [],
-            view: 'SHOW_ALL'
-        };
-        this.addTodo = this.addTodo.bind(this);
-        this.getTodo = this.getTodo.bind(this);
-    }
-
+class App extends React.Component {
     componentDidMount() {
-        this.getTodo();
+        this.props.fetchData({ method: 'GET', path: '/' });
     }
 
-    getTodo() {
-        doFetch({ method: 'GET', path: '/' })
-            .then(res => {
-                this.setState({
-                    todos: res
-                });
-            })
-            .catch(err => console.error('err: ', err));
-    }
-
-    addTodo(value) {
-        return doFetch({ method: 'POST', path: '/', body: value })
-            .then(res => {
-                const newTodoList = this.state.todos.concat(res);
-                this.setState({
-                    bunnies: newTodoList
-                });
-            })
-            .catch(err => console.error('err: ', err));
-    }
-    
     render() {
+        console.log('props: ', this.props);
+        if (this.props.hasErrored) {
+            return <p>Sorry.  There was an error loading your list.</p>;
+        }
+        if (this.props.isLoading) {
+            return <p> Loading... </p>;
+        }
         return (
         <div>
             <NewTodo addTodo={this.addTodo} />
-            <TodoList items={this.state.todos} />
+            <TodoList items={this.props.items} />
             <ListActions />
         </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        items: state.items,
+        hasErrored: state.itemsHasErrored,
+        isLoading: state.itemsIsLoading
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchData: (options) => dispatch(itemsFetchData(options))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+    fetchData: React.PropTypes.func,
+    items: React.PropTypes.array,
+    hasErrored: React.PropTypes.bool,
+    isLoading: React.PropTypes.bool
+};

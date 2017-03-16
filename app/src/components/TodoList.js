@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function TodoList(props) {
     const todoList = props.items.map(item => {
-        return <li key={item.id}>item.text</li>;
+        return <li key={item._id}>{item.text}</li>;
     });
     return (
         <ul>{todoList}</ul>
@@ -10,5 +10,5 @@ export default function TodoList(props) {
 }
 
 TodoList.propTypes = {
-    items: React.PropTypes.object
+    items: React.PropTypes.array
 };
