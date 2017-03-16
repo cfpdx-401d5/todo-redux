@@ -6,11 +6,9 @@ export default class AddTodo extends Component {
       <div>
         <form onSubmit={(e) => {
           e.preventDefault();
-          this.props.onAdd({
-            id: new Date(),
-            text: this.refs.text.value,
-            completed: false
-          });
+          this.props.onAdd(
+            this.refs.text.value
+          );
         }}>
           <input ref='text' placeholder='New Item'/>
         </form>
