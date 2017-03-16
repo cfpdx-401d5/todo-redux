@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions.js';
 
-export default class AddTodo extends Component {
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAdd(newTodoText) {
+      dispatch(addTodo(newTodoText));
+    }
+  };
+};
+
+class AddTodo extends Component {
   render() {
     return (
       <div>
@@ -16,3 +27,5 @@ export default class AddTodo extends Component {
     );
   }
 };
+
+export default connect(null, mapDispatchToProps)(AddTodo);

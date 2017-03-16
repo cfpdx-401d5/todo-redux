@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'; 
-import { ADD_TODO, CLEAR_TODOS } from './actions';
+import { ADD_TODO, CLEAR_TODOS, DELETE_TODO } from './actions';
 
 export function todos (state = [], action) {
   switch (action.type) {
@@ -11,6 +11,10 @@ export function todos (state = [], action) {
       }];
     case CLEAR_TODOS:
       return [];
+    case DELETE_TODO:
+      return state.filter(todo => {
+        return todo.id !== action.payload.todoId;
+      });
     default:
       return state;
   }

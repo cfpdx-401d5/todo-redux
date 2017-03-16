@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { clearTodos } from '../actions.js';
 
-export default class ClearTodos extends Component {
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClear() {
+      dispatch(clearTodos());
+    }
+  };
+};
+
+class ClearTodos extends Component {
   render() {
     return (
       <button onClick={(e) => {
@@ -10,3 +21,5 @@ export default class ClearTodos extends Component {
     );
   }
 }
+
+export default connect(null, mapDispatchToProps)(ClearTodos);

@@ -1,6 +1,7 @@
 //Action Types
 export const ADD_TODO = 'ADD_TODO';
 export const CLEAR_TODOS = 'CLEAR_TODOS';
+export const DELETE_TODO = 'DELETE_TODO';
 
 //Action Creators
 export function addTodo(text) {
@@ -19,4 +20,13 @@ export function clearTodos() {
       todos: []
     }
   };
-};
+}
+
+export function deleteTodo(todoId) {
+  return {
+    type: DELETE_TODO,
+    payload: {
+      todoId
+    }
+  };
+}
