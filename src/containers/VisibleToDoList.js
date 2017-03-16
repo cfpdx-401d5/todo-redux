@@ -1,7 +1,7 @@
 //The files inside of the containers dir are used to connect the presentational components inside of the components dir to Redux
 
 import { connect } from 'react-redux';
-import { toggleTodo } from '../actions';
+import { completeTodo } from '../actions';
 import TodoList from '../components/TodoList';
 
 const getVisibleTodos = (todos, filter) => {
@@ -12,6 +12,8 @@ const getVisibleTodos = (todos, filter) => {
             return todos.filter(t => t.completed)
         case 'SHOW-ACTIVE':
             return todos.filter(t => !t.completed)
+        default:
+            throw new Error('Unknown filter: ' + filter)
     }
 }
 
@@ -24,7 +26,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onTodoClick: (id) => {
-            dispatch(toggleTodo(id))
+            dispatch(completeTodo(id))
         }
     }
 }

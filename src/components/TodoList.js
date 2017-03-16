@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Todo from './Todo';
 
-const todoList = ({ todos, onTodoClick }) => (
+const TodoList = ({ todos, onTodoClick }) => (
     <ul>
         {todos.map(todo =>
             <Todo
@@ -22,4 +22,4 @@ TodoList.propTypes = {
     onTodoClick: PropTypes.func.isRequired
 }
 
-export default TodoList
+export default TodoList;
