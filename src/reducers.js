@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'; 
-import { ADD_TODO } from './actions';
+import { ADD_TODO, CLEAR_TODOS } from './actions';
 
 export function todos (state = [], action) {
   switch (action.type) {
@@ -9,6 +9,8 @@ export function todos (state = [], action) {
         text: action.payload.text,
         completed: false
       }];
+    case CLEAR_TODOS:
+      return [];
     default:
       return state;
   }

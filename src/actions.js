@@ -1,5 +1,6 @@
 //Action Types
 export const ADD_TODO = 'ADD_TODO';
+export const CLEAR_TODOS = 'CLEAR_TODOS';
 
 //Action Creators
 export function addTodo(text) {
@@ -10,3 +11,12 @@ export function addTodo(text) {
     }
   };
 }
+
+export function clearTodos() {
+  return {
+    type: CLEAR_TODOS,
+    payload: {
+      todos: []
+    }
+  };
+};
