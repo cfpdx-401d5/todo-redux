@@ -1,6 +1,6 @@
 let nextTodoId = 0;
 
-export default addTodo = (text) => {
+export default addTodoAction = (text) => {
     return {
         type: 'ADD_TODO',
         id: nextTodoId++,
