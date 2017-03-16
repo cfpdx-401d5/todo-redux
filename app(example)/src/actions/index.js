@@ -16,7 +16,7 @@ export function setVisibilityFilter(filter) {
 
 export function toggleTodo(id) {
     return {
-        type: 'TOGGLE_TOD',
+        type: 'TOGGLE_TODO',
         id
     };
 }

@@ -4,6 +4,7 @@
 /node_modules
 /app/node_modules
 /server/node_modules
+/app(example)/node_modules
 
 # testing
 /coverage
