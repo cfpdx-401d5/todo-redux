@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Todo from './Todo';
 
-export default function TodoList({ todos, onTodoClick}) {
+export default function TodoList({ todos, onTodoClick }) {
     return (
         <ul>
         {todos.map(todo =>
