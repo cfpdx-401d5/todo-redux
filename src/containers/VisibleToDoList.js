@@ -10,7 +10,7 @@ const getVisibleTodos = (todos, filter) => {
             return todos
         case 'SHOW_COMPLETED':
             return todos.filter(t => t.completed)
-        case 'SHOW-ACTIVE':
+        case 'SHOW_ACTIVE':
             return todos.filter(t => !t.completed)
         default:
             throw new Error('Unknown filter: ' + filter)
