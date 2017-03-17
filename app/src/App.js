@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { itemsFetchData, itemsPostData } from './actions/items';
+import { itemsFetchData, itemsPostData, itemsDeleteData } from './actions/items';
 import NewTodo from './components/NewTodo';
 import TodoList from './components/TodoList';
 import ListActions from './components/ListActions';
@@ -20,7 +20,7 @@ class App extends React.Component {
         return (
         <div>
             <NewTodo addTodo={this.props.postData} />
-            <TodoList items={this.props.items} />
+            <TodoList items={this.props.items} onDelete={this.props.deleteData}/>
             <ListActions />
         </div>
         );
@@ -38,7 +38,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchData: (options) => dispatch(itemsFetchData(options)),
-        postData: (options) => dispatch(itemsPostData(options))
+        postData: (options) => dispatch(itemsPostData(options)),
+        deleteData: (options) => dispatch(itemsDeleteData(options))
     };
 }
 
@@ -47,6 +48,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 App.propTypes = {
     fetchData: React.PropTypes.func,
     postData: React.PropTypes.func,
+    deleteData: React.PropTypes.func,
     items: React.PropTypes.array,
     hasErrored: React.PropTypes.bool,
     isLoading: React.PropTypes.bool

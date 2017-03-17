@@ -22,6 +22,13 @@ export function items(state = [], action) {
             const newItemArray = state.concat(action.items);
             console.log('newItemArray: ', newItemArray);
             return newItemArray;
+        case 'ITEMS_DELETE_DATA_SUCCESS':
+            const delItemArray = state.filter(item => { //eslint-disable-line
+                if (item._id !== action.items.id) {
+                    return item;
+                }
+            });
+            return delItemArray;
         default:
             return state;
     }

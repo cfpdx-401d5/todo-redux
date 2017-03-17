@@ -28,6 +28,13 @@ export function itemsPostDataSuccess(items) {
     };
 }
 
+export function itemsDeleteDataSuccess(items) {
+    return {
+        type: 'ITEMS_DELETE_DATA_SUCCESS',
+        items
+    };
+}
+
 export function itemsFetchData(options) {
     return (dispatch) => {
         dispatch(itemsIsLoading(true));
@@ -64,6 +71,26 @@ export function itemsPostData(options) {
             })
             .then(res => res.json())
             .then(item => dispatch(itemsPostDataSuccess(item)))
+            .catch(() => dispatch(itemsHasErrored(true)));
+    };
+}
+
+export function itemsDeleteData(options) {
+    return (dispatch) => {
+        dispatch(itemsIsLoading(true));
+
+        fetcher(options)
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+
+                dispatch(itemsIsLoading(false));
+
+                return res;
+            })
+            .then(res => res.json())
+            .then(item => dispatch(itemsDeleteDataSuccess(item)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

@@ -9,13 +9,3 @@ export default function fetcher(options) {
         body: JSON.stringify(body),
     });
 }
-
-// function doFetch(options) {
-//     fetcher(options)
-//         .then(res => {
-//             return res.json();
-//         })
-//         .catch(err => {
-//             console.error('err: ', err);
-//         });
-// }

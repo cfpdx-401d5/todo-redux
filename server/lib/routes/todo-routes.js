@@ -22,8 +22,9 @@ router
         .catch(next);
     })
     .delete('/:id', (req, res, next) => {
-        Todo.findByIdAndRemove(req.params.id)
-            .then(deleted => res.send({deleted: !!deleted}))
+        const id = req.params.id;
+        Todo.findByIdAndRemove(id)
+            .then(deleted => res.send({deleted: !!deleted, id: id}))
             .catch(next);
     });
 
