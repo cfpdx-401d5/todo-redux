@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteTodo, completeTodo } from '../actions';
+import { deleteTodo, completeTodo, editTodo } from '../actions';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -10,18 +10,21 @@ const mapDispatchToProps = (dispatch) => {
 
     onComplete(todo) {
       dispatch(completeTodo(todo));
+    },
+
+    onEdit(todo) {
+      dispatch(editTodo(todo));
     }
   };
 };
 
 function TodoItem(props) {
-  console.log(props.todo);
   return (
         <li>
           <input type='checkbox' checked={props.todo.completed} onChange={() => {
             props.onComplete(props.todo);
           }}/>
-          <label>{props.todo.text} x {props.todo.completed.toString()}</label>
+          <label>{props.todo.text}</label>
           <button onClick={(e) => {
             e.preventDefault();
             props.onDelete(
