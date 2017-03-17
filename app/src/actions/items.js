@@ -35,6 +35,13 @@ export function itemsDeleteDataSuccess(items) {
     };
 }
 
+export function itemsEditDataSuccess(items) {
+    return {
+        type: 'ITEMS_EDIT_DATA_SUCCESS',
+        items
+    };
+}
+
 export function itemsFetchData(options) {
     return (dispatch) => {
         dispatch(itemsIsLoading(true));
@@ -91,6 +98,25 @@ export function itemsDeleteData(options) {
             })
             .then(res => res.json())
             .then(item => dispatch(itemsDeleteDataSuccess(item)))
+            .catch(() => dispatch(itemsHasErrored(true)));
+    };
+}
+
+export function itemsEditData(options) {
+    return (dispatch) => {
+        dispatch(itemsIsLoading(true));
+        fetcher(options)
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+
+                dispatch(itemsIsLoading(false));
+
+                return res;
+            })
+            .then(res => res.json())
+            .then(item => dispatch(itemsEditDataSuccess(item)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

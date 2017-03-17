@@ -29,6 +29,15 @@ export function items(state = [], action) {
                 }
             });
             return delItemArray;
+        case 'ITEMS_EDIT_DATA_SUCCESS':
+            const editItemArray = state.map(item => { //eslint-disable-line
+                if (item._id === action.items._id) {
+                    return action.items;
+                } else {
+                    return item;
+                }
+            });
+            return editItemArray;
         default:
             return state;
     }
