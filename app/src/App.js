@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { itemsFetchData } from './actions/items';
+import { itemsFetchData, itemsPostData } from './actions/items';
 import NewTodo from './components/NewTodo';
 import TodoList from './components/TodoList';
 import ListActions from './components/ListActions';
@@ -11,7 +11,6 @@ class App extends React.Component {
     }
 
     render() {
-        console.log('props: ', this.props);
         if (this.props.hasErrored) {
             return <p>Sorry.  There was an error loading your list.</p>;
         }
@@ -20,7 +19,7 @@ class App extends React.Component {
         }
         return (
         <div>
-            <NewTodo addTodo={this.addTodo} />
+            <NewTodo addTodo={this.props.postData} />
             <TodoList items={this.props.items} />
             <ListActions />
         </div>
@@ -38,7 +37,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchData: (options) => dispatch(itemsFetchData(options))
+        fetchData: (options) => dispatch(itemsFetchData(options)),
+        postData: (options) => dispatch(itemsPostData(options))
     };
 }
 
@@ -46,6 +46,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
     fetchData: React.PropTypes.func,
+    postData: React.PropTypes.func,
     items: React.PropTypes.array,
     hasErrored: React.PropTypes.bool,
     isLoading: React.PropTypes.bool

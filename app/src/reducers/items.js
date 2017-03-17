@@ -18,6 +18,10 @@ export function items(state = [], action) {
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS':
             return action.items;
+        case 'ITEMS_POST_DATA_SUCCESS':
+            const newItemArray = state.concat(action.items);
+            console.log('newItemArray: ', newItemArray);
+            return newItemArray;
         default:
             return state;
     }

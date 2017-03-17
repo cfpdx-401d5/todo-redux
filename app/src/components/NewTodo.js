@@ -23,7 +23,7 @@ export default class NewTodo extends React.Component {
             completed: false
         };
 
-        this.props.addTodo(formPayload);
+        this.props.addTodo({ method: 'POST', path: '/', body: formPayload });
     }
 
     render() {
