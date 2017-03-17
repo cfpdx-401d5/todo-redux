@@ -1,26 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-let AddTodoForm = ({ onSubmit }) => {
-    let input;
+import { addTodoAction } from '../actions/actions';
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onSubmit: (text) => {
+//             dispatch(addTodoAction(text));
+//         }
+//     };
+// };
+
+let AddTodoForm = (props) => { // (prop) can be destructured to ({onSubmit})
 
     return (
         <div>
             <form onSubmit={e => {
                 e.preventDefault();
-                if (!input.value.trim()) {
-                    return;
-                }
-                onSubmit(input.value);
-                input.value = '';
+                // props.onSubmit(text)
+                props.dispatch(addTodoAction(e.target.elements.todo.value));
             }}>
-                <input ref={node => {
-                    input = node;
-                }} />
+                <input name='todo'/>
                 <button type='submit'>Add Todo</button>
             </form>
                 
         </div>
     );
 };
+
+AddTodoForm = connect(/* mapStateToProps|null, mapDispatchToProps */)(AddTodoForm);
 
 export default AddTodoForm;
