@@ -1,19 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteTodo } from '../actions';
+import { deleteTodo, completeTodo } from '../actions';
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onDelete(todoId) {
       dispatch(deleteTodo(todoId));
+    },
+
+    onComplete(todo) {
+      dispatch(completeTodo(todo));
     }
   };
 };
 
 function TodoItem(props) {
+  console.log(props.todo);
   return (
         <li>
-          {props.todo.text}
+          <input type='checkbox' checked={props.todo.completed} onChange={() => {
+            props.onComplete(props.todo);
+          }}/>
+          <label>{props.todo.text} x {props.todo.completed.toString()}</label>
           <button onClick={(e) => {
             e.preventDefault();
             props.onDelete(

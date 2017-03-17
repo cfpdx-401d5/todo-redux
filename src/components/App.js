@@ -1,5 +1,4 @@
 import React from 'react';
-//import todos from '../data/todos';
 import TodoList from './TodoList';
 import SelectionBar from './SelectionBar';
 
