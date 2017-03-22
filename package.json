@@ -1,0 +1,41 @@
+{
+  "name": "todo-redux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "test": "react-scripts test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meghanroserebecca/todo-redux.git"
+  },
+  "keywords": [
+    "redux",
+    "react",
+    "sandbox",
+    "todo"
+  ],
+  "author": "meghan rebecca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meghanroserebecca/todo-redux/issues"
+  },
+  "homepage": "https://github.com/meghanroserebecca/todo-redux#readme",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "enzyme": "^2.7.1",
+    "react-addons-test-utils": "^15.4.2",
+    "react-scripts": "^0.9.5"
+  }
+}

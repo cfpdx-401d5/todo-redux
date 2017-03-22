@@ -1,0 +1,50 @@
+const todo = (state = {}, action) => {
+    switch (action.type) {
+        case 'ADD_TODO':
+            return {
+                id: action.id,
+                text: action.text,
+                completed: false
+            }
+        case 'DELETE_TODO':
+            if(state.id !== action.id) {
+                return state
+            }
+
+            return Object.assign({}, state, {
+                id: !action.id
+            })
+        case 'COMPLETE_TODO':
+            if(state.id !== action.id) {
+                return state
+            }
+
+            return Object.assign({}, state, {
+                completed: !state.completed
+            })
+        // case 'COMPLETE_ALL':
+        //     return Object.assign({}, state, {
+
+        //     })
+        default:
+            return state
+    }
+}
+
+const todos = (state = [], action) => {
+    switch (action.type) {
+        case 'ADD_TODO':
+            return [
+                ...state,
+                todo(undefined, action)
+            ]
+        case 'COMPLETE_TODO':
+            return state.map(t => 
+                todo(t, action)
+            )
+        default:
+            return state
+    }
+}
+
+export default todos;
