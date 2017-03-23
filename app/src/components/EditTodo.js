@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { itemsEditData } from '../actions/items';
 
-export default class EditTodo extends React.Component {
+
+class EditTodo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,6 +13,7 @@ export default class EditTodo extends React.Component {
         };
         this.handleFormChange = this.handleFormChange.bind(this);
         this.editTodo = this.editTodo.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     handleFormChange(e) {
@@ -42,6 +46,14 @@ export default class EditTodo extends React.Component {
         )
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        editData: (options) => dispatch(itemsEditData(options)),
+    };
+}
+
+export default connect(null, mapDispatchToProps)(EditTodo);
 
 EditTodo.propTypes = {
     item: React.PropTypes.object,

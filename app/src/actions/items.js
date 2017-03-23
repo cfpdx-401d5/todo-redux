@@ -1,5 +1,15 @@
 import fetcher from '../helpers';
 
+export const VisibilityFilters = {
+    SHOW_ALL: 'SHOW_ALL',
+    SHOW_COMPLETED: 'SHOW_COMPLETED',
+    SHOW_ACTIVE: 'SHOW_ACTIVE'
+};
+
+export function setVisibilityFilter(filter) {
+    return { type: 'SET_VISIBILITY_FILTER', filter };
+}
+
 export function itemsHasErrored(bool) {
     return {
         type: 'ITEMS_HAS_ERRORED',
@@ -47,17 +57,8 @@ export function itemsFetchData(options) {
         dispatch(itemsIsLoading(true));
 
         fetcher(options)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-
-                dispatch(itemsIsLoading(false));
-
-                return res;
-            })
-            .then(res => res.json())
             .then(items => dispatch(itemsFetchDataSuccess(items)))
+            .then(dispatch(itemsIsLoading(false)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }
@@ -67,17 +68,8 @@ export function itemsPostData(options) {
         dispatch(itemsIsLoading(true));
 
         fetcher(options)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-
-                dispatch(itemsIsLoading(false));
-
-                return res;
-            })
-            .then(res => res.json())
             .then(item => dispatch(itemsPostDataSuccess(item)))
+            .then(dispatch(itemsIsLoading(false)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }
@@ -87,17 +79,8 @@ export function itemsDeleteData(options) {
         dispatch(itemsIsLoading(true));
 
         fetcher(options)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-
-                dispatch(itemsIsLoading(false));
-
-                return res;
-            })
-            .then(res => res.json())
             .then(item => dispatch(itemsDeleteDataSuccess(item)))
+            .then(dispatch(itemsIsLoading(false)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }
@@ -106,17 +89,8 @@ export function itemsEditData(options) {
     return (dispatch) => {
         dispatch(itemsIsLoading(true));
         fetcher(options)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-
-                dispatch(itemsIsLoading(false));
-
-                return res;
-            })
-            .then(res => res.json())
             .then(item => dispatch(itemsEditDataSuccess(item)))
+            .then(dispatch(itemsIsLoading(false)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

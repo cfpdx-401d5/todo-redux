@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { itemsDeleteData, setVisibilityFilter } from '../actions/items';
 import EditTodo from './EditTodo';
 
 function Buttons(props) {
@@ -7,13 +9,13 @@ function Buttons(props) {
             <button onClick={() => props.onEdit()}>Edit</button> 
             <button onClick={() => props.onDelete(props.item._id)}>Delete</button>
         <div>
-            {props.isEditable && <EditTodo item={props.item} onDisplay={props.onEdit} editData={props.editData} />}
+            {props.isEditable && <EditTodo item={props.item} onDisplay={props.onEdit} />}
         </div>
     </div>
     );  
 }
 
-export default class TodoList extends React.Component {
+class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,6 +23,20 @@ export default class TodoList extends React.Component {
         };
         this.deleteTodo = this.deleteTodo.bind(this);
         this.editForm = this.editForm.bind(this);
+        this.listView = this.listView.bind(this);
+    }
+
+    listView(filter, todos) {
+        switch (filter) {
+            case 'SHOW_ALL':
+                return todos;
+            case 'SHOW_COMPLETED':
+                return todos.filter(t => t.completed);
+            case 'SHOW_ACTIVE':
+                return todos.filter(t => !t.completed);
+            default:
+                return todos.filter(t => !t.completed);
+        }
     }
 
     editForm() {
@@ -30,19 +46,19 @@ export default class TodoList extends React.Component {
     }
 
     deleteTodo(e) {
-        this.props.onDelete({ method: 'DELETE', path: `/${e}` });
+        this.props.deleteData({ method: 'DELETE', path: `/${e}` });
     }
 
     render() {
-        const todoList = this.props.items.map(item => {
+        const todoList = this.listView('SHOW_ACTIVE', this.props.items).map(item => {
             return (
             <li key={item._id}>
+                <input type='checkbox' />
                 {item.text} 
-                <Buttons onDelete={this.deleteTodo} 
+                <Buttons onDelete={this.props.deleteData} 
                     item={item} 
                     onEdit={this.editForm} 
-                    isEditable={this.state.isEditable} 
-                    editData={this.props.editData} />
+                    isEditable={this.state.isEditable} />
             </li>
             );
         });
@@ -52,10 +68,26 @@ export default class TodoList extends React.Component {
     }   
 }
 
+function mapStateToProps(state) {
+    return {
+        items: state.items
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        deleteData: (options) => dispatch(itemsDeleteData(options)),
+        visibility: (filter) => dispatch(setVisibilityFilter(filter))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+
 TodoList.propTypes = {
     items: React.PropTypes.array,
-    onDelete: React.PropTypes.func,
-    editData: React.PropTypes.func
+    deleteData: React.PropTypes.func,
+    editData: React.PropTypes.func,
+    editForm: React.PropTypes.func
 };
 
 Buttons.propTypes = {

@@ -1,3 +1,5 @@
+import { VisibilityFilters } from '../actions/items';
+
 export function itemsHasErrored(state = false, action) {
     switch (action.type) {
         case 'ITEMS_HAS_ERRORED':
@@ -38,6 +40,15 @@ export function items(state = [], action) {
                 }
             });
             return editItemArray;
+        default:
+            return state;
+    }
+}
+
+export function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action) {
+    switch (action.type) {
+        case 'SET_VISIBILITY_FILTER':
+            return action.filter;
         default:
             return state;
     }

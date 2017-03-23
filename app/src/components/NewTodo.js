@@ -1,6 +1,9 @@
 import React from 'react';
+import { itemsPostData } from '../actions/items';
+import { connect } from 'react-redux';
 
-export default class NewTodo extends React.Component {
+
+class NewTodo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +26,7 @@ export default class NewTodo extends React.Component {
             completed: false
         };
 
-        this.props.addTodo({ method: 'POST', path: '/', body: formPayload });
+        this.props.postData({ method: 'POST', path: '/', body: formPayload });
     }
 
     render() {
@@ -36,6 +39,14 @@ export default class NewTodo extends React.Component {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        postData: (options) => dispatch(itemsPostData(options))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(NewTodo);
+
 NewTodo.propTypes = {
-    addTodo: React.PropTypes.func
+    postData: React.PropTypes.func
 };
