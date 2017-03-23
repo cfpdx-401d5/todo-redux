@@ -1,22 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setVisibilityFilter } from '../actions/items';
 
 class ListActions extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: this.props.items,
-            view: 'all'
-        };
-    }
 
     render() {
         return (
             <div>
                 Show:
-                <button>All</button>
-                <button>Completed</button>
-                <button>Active</button>
+                <button onClick={() => this.props.visibility('SHOW_ALL')}>All</button>
+                <button onClick={() => this.props.visibility('SHOW_COMPLETED')}>Completed</button>
+                <button onClick={() => this.props.visibility('SHOW_ACTIVE')}>Active</button>
 
                 <div>
                     <button>Clear Completed</button>
@@ -27,14 +21,14 @@ class ListActions extends React.Component {
     } 
 }
 
-function mapStateToProps(state) {
+function mapDispatchToProps(dispatch) {
     return {
-        items: state.items
+        visibility: (filter) => dispatch(setVisibilityFilter(filter))
     };
 }
 
-export default connect(mapStateToProps)(ListActions);
+export default connect(null, mapDispatchToProps)(ListActions);
 
 ListActions.propTypes = {
-    items: React.PropTypes.array
+    visibility: React.PropTypes.func
 };

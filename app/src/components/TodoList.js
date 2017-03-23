@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { itemsDeleteData, setVisibilityFilter } from '../actions/items';
+import { itemsDeleteData } from '../actions/items';
 import EditTodo from './EditTodo';
 
 function Buttons(props) {
@@ -19,7 +19,7 @@ class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditable: false
+            isEditable: false,
         };
         this.deleteTodo = this.deleteTodo.bind(this);
         this.editForm = this.editForm.bind(this);
@@ -50,7 +50,7 @@ class TodoList extends React.Component {
     }
 
     render() {
-        const todoList = this.listView('SHOW_ACTIVE', this.props.items).map(item => {
+        const todoList = this.listView(this.props.filter, this.props.items).map(item => {
             return (
             <li key={item._id}>
                 <input type='checkbox' />
@@ -70,14 +70,14 @@ class TodoList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        items: state.items
+        items: state.items,
+        filter: state.visibilityFilter
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         deleteData: (options) => dispatch(itemsDeleteData(options)),
-        visibility: (filter) => dispatch(setVisibilityFilter(filter))
     };
 }
 
@@ -87,7 +87,8 @@ TodoList.propTypes = {
     items: React.PropTypes.array,
     deleteData: React.PropTypes.func,
     editData: React.PropTypes.func,
-    editForm: React.PropTypes.func
+    editForm: React.PropTypes.func,
+    filter: React.PropTypes.string
 };
 
 Buttons.propTypes = {
