@@ -2,6 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { clearTodo, completeTodo, editTodo } from '../actions';
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDelete(todoId) {
+            dispatch(clearTodo(todoId));
+        },
+
+        onComplete(todo) {
+            dispatch(completeTodo(todo));
+        },
+
+        onEdit(todo) {
+            dispatch(editTodo(todo));
+        }
+    };
+};
+
 function TodoItem(props) {
     return (
         <li>
@@ -18,3 +34,5 @@ function TodoItem(props) {
         </li>
     );
 };
+
+export default connect(null, mapDispatchToProps)(TodoItem);
