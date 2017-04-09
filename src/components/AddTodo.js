@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 
-const mapDispatchToProps = (disatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onAdd(newTodo) {
-            dispatch(onAdd(newTodo));
+        onAdd(newTodoText) {
+            dispatch(addTodo(newTodoText));
         }
     };
 };
@@ -27,4 +27,4 @@ class AddTodo extends Component {
     }
 };
 
-export default connect(null, mapDispatchToProps);
+export default connect(null, mapDispatchToProps)(AddTodo);

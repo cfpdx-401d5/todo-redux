@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 function TodoItem(props) {
     return (
         <li>
-            <input type='checkbox' checked={props.todos.completed} onChange={() => {
+            <input type='checkbox' onChange={() => {
                 props.onComplete(props.todo);
             }}/>
             <label>{props.todo.text}</label>
