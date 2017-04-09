@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 
+const mapDispatchToProps = (disatch) => {
+    return {
+        onAdd(newTodo) {
+            dispatch(onAdd(newTodo));
+        }
+    };
+};
+
 class AddTodo extends Component {
     render() {
         return (
@@ -18,3 +26,5 @@ class AddTodo extends Component {
         );
     }
 };
+
+export default connect(null, mapDispatchToProps);
